@@ -18,33 +18,28 @@ let appData = {
     expenses : {},
     optionalExpenses: {},
     income: [],
-    savings: false
+    savings: true
 }
 
-// let a1 = prompt("Введите обязательную статью расходов в этом месяце", '');
-// let a2 = prompt("Во сколько обойдется?", '');
-// let a3 = prompt("Введите обязательную статью расходов в этом месяце", '');
-// let a4 = prompt("Во сколько обойдется?", '');
+function chooseExpenses() {
+    for (let i = 0; i < 2; i++) {
+        let a = prompt("Введите обязательную статью расходов в этом месяце", ''),
+            b = prompt("Во сколько обойдется?", '');
 
-// appData.expenses.a1 = a2;
-// appData.expenses.a3 = a4;
+        if ((typeof (a)) === 'string' && (typeof (a)) != null && (typeof (b)) != null
+            && a != '' && b != '' && a.length < 50) {
+            console.log('done');
+            appData.expenses[a] = b;
 
-for (let i = 0; i < 2; i++) {
-    let a = prompt("Введите обязательную статью расходов в этом месяце", ''),
-        b = prompt("Во сколько обойдется?", '');
+        } else {
+            i = i - 1;
+        }
 
-    if ((typeof (a)) === 'string' && (typeof (a)) != null && (typeof (b)) != null
-        && a != '' && b != '' && a.length < 50) {
-        console.log('done');
-        appData.expenses[a] = b;
-
-    } else {
-        i = i - 1;
     }
-    
-};
+}
+chooseExpenses();
 
-appData.moneyPerDay = appData.budjet / 30;
+appData.moneyPerDay = (appData.budjet / 30).toFixed();//
 
 alert("budjet:" + appData.moneyPerDay);
 if(appData.moneyPerDay < 100) {
@@ -56,3 +51,15 @@ if(appData.moneyPerDay < 100) {
 } else {
     console.log('error');
 }
+
+
+function checkSavings() {
+    if (appData.savings == true) {
+        let save = +prompt(" какова сумма накоплений?"),
+            percent = (" под какой процент ");
+
+        appData.monthIncome = save/100/12*percent;
+        alert("доход в месяц с депозита:" + appData.monthIncome);
+    }
+}
+checkSavings();
